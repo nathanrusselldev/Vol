@@ -6,21 +6,22 @@ import axios from 'axios'
 
 export default function App() {
 
-  // const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
-  // async function fetchUsers() {
-  //   try {
-  //     const {data} = await axios.get('https://randomuser.me/api/?results=20&gender=female')
-  //     setUsers(data.results)
-  //     console.log(data.results)
-  //   } catch (error) {
-  //     console.log(error)
-  //     Alert.alert('Error, Please Try Again', '', [{text: 'Retry', onPress: () => fetchUsers()}])
-  //   }
-  // }
-  // useEffect(() => {
-  //   fetchUsers()
-  // }, [])
+  async function fetchUsers() {
+    try {
+      const {data} = await axios.get('https://randomuser.me/api/?results=20&gender=female')
+      setUsers(data.results)
+      console.log(data.results)
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Error, Please Try Again', '', [{text: 'Retry', onPress: () => fetchUsers()}])
+    }
+  }
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
   return (
     <View style={styles.container}>
       <TopBar />
