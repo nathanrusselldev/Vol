@@ -24,7 +24,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TopBar />
-        <View>style={styles.swipes}</View>
+        <View style={styles.swipes}></View>
     </View>
   );
 }
