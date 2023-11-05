@@ -2,17 +2,19 @@ import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Alert } from 'react-native';
 import Constants from 'expo-constants'
 import TopBar from './components/TopBar'
+import SwipeableImage from './components/SwipeableImage';
 import axios from 'axios'
 
 export default function App() {
 
   const [users, setUsers] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   async function fetchUsers() {
     try {
       const {data} = await axios.get('https://randomuser.me/api/?results=20&gender=female')
       setUsers(data.results)
-      console.log(data.results)
+ 
     } catch (error) {
       console.log(error)
       Alert.alert('Error, Please Try Again', '', [{text: 'Retry', onPress: () => fetchUsers()}])
@@ -23,9 +25,12 @@ export default function App() {
   }, [])
 
   return (
+    
     <View style={styles.container}>
       <TopBar />
-        <View style={styles.swipes}></View>
+      <View style={styles.swipes}>
+          { users.length > 1 && (<SwipeableImage user={users[currentIndex]}></SwipeableImage>)}
+        </View>
     </View>
   );
 }
